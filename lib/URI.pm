@@ -159,6 +159,11 @@ sub uri_port_ok($$)
 	
 =back
 
+=head1 TO DO
+
+* add methods: uri_canonical_ok, uri_query_string_ok, uri_path_ok,
+	uri_fragment_ok, uri_same_ok
+	
 =head1 AUTHOR
 
 brian d foy, E<lt>brian d foyE<gt>
