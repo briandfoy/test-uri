@@ -1,0 +1,7 @@
+MANIFEST
+Makefile.PL
+lib/URI.pm
+t/functions.t
+t/load.t
+t/pod.t
+t/test_manifest
