@@ -1,29 +1,42 @@
 # $Id$
 use ExtUtils::MakeMaker;
 
-my $tests = do {
-	local @ARGV = qw(t/test_manifest);
-	my $data = join " ", map {chomp; "t/$_" } <>;
-	};
+eval "use Test::Manifest";
+
+unless( $@ )
+	{
+	* ExtUtils::MM_Any::test_via_harness = sub
+		{
+		my($self, $perl, $tests) = @_;
+
+		return qq|\t$perl "-MTest::Manifest" | .
+		  qq|"-e" "run_t_manifest(\$(TEST_VERBOSE), '\$(INST_LIB)', | .
+		  qq|'\$(INST_ARCHLIB)')"\n|;
+		}
+	}
 
 WriteMakefile
         (
-        'NAME'      => 'Test::URI',
-        'ABSTRACT'  => 'Check Uniform Resource Identifiers',
-        'VERSION'   => '0.5_04',
+        'NAME'           => 'Test::URI',
+        'ABSTRACT'       => 'Check Uniform Resource Identifiers',
+        'VERSION_FROM'   => 'lib/URI.pm',
+
  		'PREREQ_PM' => {
- 			'File::Find::Rule'      => 0,
- 			'Test::Pod'             => 0,
- 			'Test::More'            => 0,
- 			'Test::Builder::Tester' => 0,
- 			'URI'                   => 0,
+ 			'Test::More'            => '0',
+ 			'Test::Builder::Tester' => '0',
+ 			'URI'                   => '0',
  			},
+
         'PM'        => 
         	{
             'lib/URI.pm'     => '$(INST_LIBDIR)/URI.pm',
           },
  
- 		depend => { Makefile => 't/test_manifest' },
-        test   => { TESTS => $tests },
+
+		'MAN3PODS'     => {
+			'lib/URI.pm' => '$(INST_MAN3DIR)/Test::URI.3',
+			},
+
+		clean  => { FILES    => q|Test-URI-* test_files| },
         );
 

@@ -3,7 +3,12 @@ Changes
 MANIFEST
 Makefile.PL
 lib/URI.pm
+t/fragment.t
+t/path.t
 t/functions.t
 t/load.t
 t/pod.t
+t/prereq.t
 t/test_manifest
+META.yml                                 Module meta-data (added by MakeMaker)
+README

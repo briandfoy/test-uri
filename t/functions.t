@@ -82,7 +82,10 @@ foreach my $pair ( @bad_uri_pairs )
 			"\tExpected [$array[1]]",
 			"\tGot [$scheme]");
 		}
-	test_test('uri_scheme_ok catches errors');
+	test_test( 
+		title    => 'uri_host_ok scheme errors',
+		skip_err => 1,
+		);
 
 	test_out( "not ok 1" );
 	if( $array[2] eq 'PASS' )
@@ -106,7 +109,10 @@ foreach my $pair ( @bad_uri_pairs )
 				"$scheme schemes do not have a host" );
 			}
 		}
-	test_test('uri_host_ok catches errors');
+	test_test( 
+		title    => 'uri_host_ok catches errors',
+		skip_err => 1,
+		);
 
 	test_out( "not ok 1" );
 	if( $array[3] eq 'PASS' )
@@ -129,7 +135,10 @@ foreach my $pair ( @bad_uri_pairs )
 				"$scheme schemes do not have a port" );
 			}
 		}
-	test_test('uri_port_ok catches errors');
+	test_test( 
+		title    => 'uri_port_ok catches errors',
+		skip_err => 1,
+		);
 
 	}
 
