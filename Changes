@@ -1,4 +1,12 @@
 # $Id$
 
+1.03 - Sun Nov 21 18:23:34 2004
+	* added new functions uri_path_ok and uri_fragment_ok
+	* re-implemented some methods to use some common code, so there
+	is an additional redirection which might screw up external code
+	that looks at the file and line for error messages
+	* cleaned up the distribution for modern best practices
+	* no need to upgrade unless you want the new functions
+
 0.5_04 - Mon Sep  9 11:52:49 CDT 2002
     + got rid of Test::Manifest
