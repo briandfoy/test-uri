@@ -1,5 +1,8 @@
 # $Id$
 
+1.04 - Tue Mar  8 18:23:51 2005
+	* Added POD coverage tests: no need to upgrade
+
 1.03 - Sun Nov 21 18:23:34 2004
 	* added new functions uri_path_ok and uri_fragment_ok
 	* re-implemented some methods to use some common code, so there
