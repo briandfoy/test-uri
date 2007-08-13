@@ -9,6 +9,7 @@ WriteMakefile
 	'ABSTRACT'       => 'Check Uniform Resource Identifiers',
 	'VERSION_FROM'   => 'lib/URI.pm',
 	'LICENSE'        => 'perl',
+	'AUTHOR'         => 'brian d foy <bdfoy@cpan.org>',
 
 	'PREREQ_PM' => {
 		'Test::More'            => '0',
