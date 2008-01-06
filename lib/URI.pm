@@ -14,7 +14,7 @@ my $Test = Test::Builder->new();
 @EXPORT = qw(uri_scheme_ok uri_host_ok uri_port_ok uri_fragment_ok
 	uri_path_ok);
 
-$VERSION = 1.07;
+$VERSION = 1.08;
 
 =head1 NAME
 
