@@ -163,6 +163,8 @@ sub _methodx_ok($$$)
 	my $expected = shift;
 	my $methodx  = lc shift;
 	
+	local $Test::Builder::Level = $Test::Builder::Level + 1;
+	
 	my $uri    = ref $string ? $string : URI->new( $string );
 	
 	unless( UNIVERSAL::isa( $uri, 'URI' ) )
@@ -179,7 +181,7 @@ sub _methodx_ok($$$)
 	elsif( $uri->$methodx ne $expected )
 		{
 		$Test->ok(0);
-		$Test->diag("URI [$string] does not have the right fragment\n",
+		$Test->diag("URI [$string] does not have the right $methodx\n",
 			"\tExpected [$expected]\n",
 			"\tGot [" . $uri->$methodx . "]\n",
 			);
