@@ -1,4 +1,3 @@
-# $Id$
 package Test::URI;
 use strict;
 

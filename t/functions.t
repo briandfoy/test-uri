@@ -1,5 +1,3 @@
-# $Id$
-
 BEGIN {
 	@good_uri_pairs = (
 	[qw( http://www.example.com       http    www.example.com      80) ],
