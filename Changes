@@ -27,4 +27,4 @@
 	* no need to upgrade unless you want the new functions
 
 0.5_04 - Mon Sep  9 11:52:49 CDT 2002
-    + got rid of Test::Manifest
+    * got rid of Test::Manifest
