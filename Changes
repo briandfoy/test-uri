@@ -1,24 +1,24 @@
 Revision history for Perl module Test::URI
 
-1.08 - Sun Jan  6 14:30:15 2008
+1.08 - 2008-01-06
 	* Require 5.006 now. CPAN Testers showed that some things don't
 	work in 5.005 and I'm taking the easy way out :)
 	* No need to upgrade if you already have this installed.
 
-1.07 - Sun Aug 12 21:55:50 2007
+1.07 - 2007-08-12
 	* fixes to clean up META.yml. No need to upgrade.
 
-1.06 - Tue Jan  9 22:55:54 2007
+1.06 - 2007-01-09
 	* updated copyright and license info
 	* no code changes, so no need to upgrade
 
-1.05 - Wed May 17 21:25:11 2006
+1.05 - 2006-05-17
 	* updates for distro and kwalitee. No need to upgrade.
 
-1.04 - Tue Mar  8 18:23:51 2005
+1.04 - 2005-03-08
 	* Added POD coverage tests: no need to upgrade
 
-1.03 - Sun Nov 21 18:23:34 2004
+1.03 - 2004-11-21
 	* added new functions uri_path_ok and uri_fragment_ok
 	* re-implemented some methods to use some common code, so there
 	is an additional redirection which might screw up external code
@@ -26,5 +26,5 @@ Revision history for Perl module Test::URI
 	* cleaned up the distribution for modern best practices
 	* no need to upgrade unless you want the new functions
 
-0.5_04 - Mon Sep  9 11:52:49 CDT 2002
+0.5_04 - 2002-09-09
     * got rid of Test::Manifest
