@@ -49,7 +49,7 @@ my %WriteMakefile = (
 			},
 		},
 
-	clean  => { FILES    => q|Test-URI-* test_files| },
+	clean => { FILES => "$dist-*" },
 	);
 
 
