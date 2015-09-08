@@ -1,24 +1,5 @@
 sudo: false
 
-sudo: false
-
-#!/Users/brian/bin/perls/perl5.22.0
-use v5.10;
-
-my $data = do { local( $/ ); <DATA> };
-
-$data =~ s/\t/    /gm;
-$data =~ s/\h+-\h"5\.20"\n\h*\n/    - "5.20"\n    - "5.22"\n\n/;
-$data =~ s/\s+\z//gm;
-
-my $top =<<"HERE";
-sudo: false
-
-HERE
-
-say $top . $data;
-
-__END__
 language: perl
 perl:
     - "5.8"
