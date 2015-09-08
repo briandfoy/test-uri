@@ -15,6 +15,8 @@ my $Test = Test::Builder->new();
 
 $VERSION = 1.08;
 
+=encoding utf8
+
 =head1 NAME
 
 Test::URI - Check Uniform Resource Identifiers
@@ -23,15 +25,15 @@ Test::URI - Check Uniform Resource Identifiers
 
 	use Test::More tests => 5;
 	use Test::URI;
-	
+
 	# http://www.example.com:8080/index.html#name
-	
+
 	uri_scheme_ok( $uri, 'http' );
 	uri_host_ok( $uri, 'www.example.com' );
 	uri_port_ok( $uri, '8080' );
 	uri_path_ok( $uri, '/index.html' );
 	uri_fragment_ok( $uri, 'name' );
-	
+
 =head1 DESCRIPTION
 
 Check various parts of Uniform Resource Locators
@@ -52,12 +54,12 @@ STRING can be an URI object.
 =cut
 
 sub uri_scheme_ok($$)
-	{	
+	{
 	my $string = shift;
 	my $scheme = lc shift;
-	
+
 	my $uri    = ref $string ? $string : URI->new( $string );
-	
+
 	unless( UNIVERSAL::isa( $uri, 'URI' ) )
 		{
 		$Test->ok(0);
@@ -75,9 +77,9 @@ sub uri_scheme_ok($$)
 		{
 		$Test->ok(1);
 		}
-		
+
 	}
-	
+
 =item uri_host_ok( STRING|URI, HOST )
 
 Ok is the STRING is a valid URI, in any format that
@@ -91,7 +93,7 @@ STRING can be an URI object.
 =cut
 
 sub uri_host_ok($$)
-	{	
+	{
 	_methodx_ok( $_[0], $_[1], 'host' );
 	}
 
@@ -109,8 +111,8 @@ STRING can be an URI object.
 my %Portless = map { $_, $_ } qw(mailto file);
 
 sub uri_port_ok($$)
-	{	
-	_methodx_ok( $_[0], $_[1], 'port' );		
+	{
+	_methodx_ok( $_[0], $_[1], 'port' );
 	}
 
 =item uri_canonical_ok
@@ -123,7 +125,7 @@ If anyone else knows, I'll implement it.
 sub uri_canonical_ok($$)
 	{
 	}
-	
+
 =item uri_path_ok( STRING|URI, PATH )
 
 Ok is the STRING is a valid URI, in any format that
@@ -139,7 +141,7 @@ sub uri_path_ok($$)
 	{
 	_methodx_ok( $_[0], $_[1], 'path' );
 	}
-	
+
 =item uri_fragment_ok( STRING|URI, FRAGMENT )
 
 
@@ -154,18 +156,18 @@ sub uri_fragment_ok($$)
 	{
 	_methodx_ok( $_[0], $_[1], 'fragment' );
 	}
-	
+
 
 sub _methodx_ok($$$)
 	{
 	my $string   = shift;
 	my $expected = shift;
 	my $methodx  = lc shift;
-	
+
 	local $Test::Builder::Level = $Test::Builder::Level + 1;
-	
+
 	my $uri    = ref $string ? $string : URI->new( $string );
-	
+
 	unless( UNIVERSAL::isa( $uri, 'URI' ) )
 		{
 		$Test->ok(0);
@@ -176,7 +178,7 @@ sub _methodx_ok($$$)
 		$Test->ok(0);
 		my $scheme = $uri->scheme;
 		$Test->diag("$scheme schemes do not have a $methodx");
-		}		
+		}
 	elsif( $uri->$methodx ne $expected )
 		{
 		$Test->ok(0);
@@ -194,13 +196,13 @@ sub _methodx_ok($$$)
 
 sub _same_thing_exactly  { $_[0] eq $_[1] }
 sub _same_thing_caseless { _same_think_exactly( map { lc } @_ ) }
-	
+
 =back
 
 =head1 TO DO
 
 * add methods: uri_canonical_ok, uri_query_string_ok
-	
+
 =head1 SOURCE AVAILABILITY
 
 This source is part of a SourceForge project which always has the
