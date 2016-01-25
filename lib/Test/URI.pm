@@ -25,7 +25,7 @@ Test::URI - Check Uniform Resource Identifiers
 	use Test::More tests => 5;
 	use Test::URI;
 
-	# http://www.example.com:8080/index.html#name
+	my $uri = 'http://www.example.com:8080/index.html#name'
 
 	uri_scheme_ok( $uri, 'http' );
 	uri_host_ok( $uri, 'www.example.com' );
