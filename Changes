@@ -1,5 +1,9 @@
 Revision history for Perl module Test::URI
 
+1.081 2016-01-25T16:53:44Z
+	* Freshen the distro, move to GitHub
+	* The code is the same
+
 1.08 - 2008-01-06
 	* Require 5.006 now. CPAN Testers showed that some things don't
 	work in 5.005 and I'm taking the easy way out :)
