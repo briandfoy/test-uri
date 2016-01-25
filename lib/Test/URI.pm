@@ -52,28 +52,24 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_scheme_ok($$)
-	{
+sub uri_scheme_ok($$) {
 	my $string = shift;
 	my $scheme = lc shift;
 
 	my $uri    = ref $string ? $string : URI->new( $string );
 
-	unless( UNIVERSAL::isa( $uri, 'URI' ) )
-		{
+	unless( UNIVERSAL::isa( $uri, 'URI' ) ) {
 		$Test->ok(0);
 		$Test->diag("URI [$string] does not appear to be valid");
 		}
-	elsif( $uri->scheme ne $scheme )
-		{
+	elsif( $uri->scheme ne $scheme ) {
 		$Test->ok(0);
 		$Test->diag("URI [$string] does not have the right scheme\n",
 			"\tExpected [$scheme]\n",
 			"\tGot [" . $uri->scheme . "]\n",
 			);
 		}
-	else
-		{
+	else {
 		$Test->ok(1);
 		}
 
@@ -91,8 +87,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_host_ok($$)
-	{
+sub uri_host_ok($$) {
 	_methodx_ok( $_[0], $_[1], 'host' );
 	}
 
@@ -121,9 +116,7 @@ If anyone else knows, I'll implement it.
 
 =cut
 
-sub uri_canonical_ok($$)
-	{
-	}
+sub uri_canonical_ok($$) {}
 
 =item uri_path_ok( STRING|URI, PATH )
 
@@ -136,8 +129,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_path_ok($$)
-	{
+sub uri_path_ok($$) {
 	_methodx_ok( $_[0], $_[1], 'path' );
 	}
 
@@ -157,8 +149,7 @@ sub uri_fragment_ok($$)
 	}
 
 
-sub _methodx_ok($$$)
-	{
+sub _methodx_ok($$$) {
 	my $string   = shift;
 	my $expected = shift;
 	my $methodx  = lc shift;
@@ -167,27 +158,23 @@ sub _methodx_ok($$$)
 
 	my $uri    = ref $string ? $string : URI->new( $string );
 
-	unless( UNIVERSAL::isa( $uri, 'URI' ) )
-		{
+	unless( UNIVERSAL::isa( $uri, 'URI' ) ) {
 		$Test->ok(0);
 		$Test->diag("URI [$string] does not appear to be valid");
 		}
-	elsif( not $uri->can( $methodx ) )
-		{
+	elsif( not $uri->can( $methodx ) ) {
 		$Test->ok(0);
 		my $scheme = $uri->scheme;
 		$Test->diag("$scheme schemes do not have a $methodx");
 		}
-	elsif( $uri->$methodx ne $expected )
-		{
+	elsif( $uri->$methodx ne $expected ) {
 		$Test->ok(0);
 		$Test->diag("URI [$string] does not have the right $methodx\n",
 			"\tExpected [$expected]\n",
 			"\tGot [" . $uri->$methodx . "]\n",
 			);
 		}
-	else
-		{
+	else {
 		$Test->ok(1);
 		}
 	}
