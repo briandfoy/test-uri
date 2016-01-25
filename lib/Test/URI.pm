@@ -202,15 +202,15 @@ sub _same_thing_caseless { _same_think_exactly( map { lc } @_ ) }
 
 * add methods: uri_canonical_ok, uri_query_string_ok
 
+=item * add convenience methods such as uri_is_web, uri_is_ftp
+
+=back
+
 =head1 SOURCE AVAILABILITY
 
-This source is part of a SourceForge project which always has the
-latest sources in CVS, as well as all of the previous releases.
+This source is in GitHub
 
-	http://sourceforge.net/projects/brian-d-foy/
-
-If, for some reason, I disappear from the world, one of the other
-members of the project can shepherd this module appropriately.
+	https://github.com/briandfoy/Test-URI
 
 =head1 AUTHOR
 
