@@ -200,7 +200,9 @@ sub _same_thing_caseless { _same_think_exactly( map { lc } @_ ) }
 
 =head1 TO DO
 
-* add methods: uri_canonical_ok, uri_query_string_ok
+=over 4
+
+=item * add methods: uri_canonical_ok, uri_query_string_ok
 
 =item * add convenience methods such as uri_is_web, uri_is_ftp
 
