@@ -1,11 +1,10 @@
 package Test::URI;
 use strict;
 
-use base qw(Exporter);
 use vars qw(@EXPORT $VERSION);
 
 use URI;
-use Exporter;
+use Exporter qw(import);
 use Test::Builder;
 
 my $Test = Test::Builder->new();
