@@ -199,7 +199,7 @@ sub _same_thing_caseless { _same_think_exactly( map { lc } @_ ) }
 
 This source is in GitHub
 
-	https://github.com/briandfoy/Test-URI
+	https://github.com/briandfoy/test-uri
 
 =head1 AUTHOR
 
