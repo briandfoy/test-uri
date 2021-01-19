@@ -132,3 +132,5 @@ foreach my $pair ( @bad_uri_pairs )
 		);
 
 	}
+
+done_testing();
