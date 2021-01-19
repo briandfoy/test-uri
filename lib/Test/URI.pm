@@ -52,7 +52,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_scheme_ok($$) {
+sub uri_scheme_ok {
 	my $string = shift;
 	my $scheme = lc shift;
 
@@ -87,7 +87,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_host_ok($$) {
+sub uri_host_ok {
 	_methodx_ok( $_[0], $_[1], 'host' );
 	}
 
@@ -104,7 +104,7 @@ STRING can be an URI object.
 
 my %Portless = map { $_, $_ } qw(mailto file);
 
-sub uri_port_ok($$)
+sub uri_port_ok
 	{
 	_methodx_ok( $_[0], $_[1], 'port' );
 	}
@@ -116,7 +116,7 @@ If anyone else knows, I'll implement it.
 
 =cut
 
-sub uri_canonical_ok($$) {}
+sub uri_canonical_ok {}
 
 =item uri_path_ok( STRING|URI, PATH )
 
@@ -129,7 +129,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_path_ok($$) {
+sub uri_path_ok {
 	_methodx_ok( $_[0], $_[1], 'path' );
 	}
 
@@ -143,13 +143,13 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_fragment_ok($$)
+sub uri_fragment_ok
 	{
 	_methodx_ok( $_[0], $_[1], 'fragment' );
 	}
 
 
-sub _methodx_ok($$$) {
+sub _methodx_ok {
 	my $string   = shift;
 	my $expected = shift;
 	my $methodx  = lc shift;

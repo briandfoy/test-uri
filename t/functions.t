@@ -20,16 +20,9 @@ BEGIN {
 	[qw( nntp://nntp.perl.org          nntp:    NULL            NULL)],
 	[qw( mailto:bdfoy@example.com      mail     example.com       25)],
 	);
-
-	@functions = map "uri_${_}_ok", qw(
-		scheme host port)
 }
 
-use Test::Builder::Tester tests =>
-	2 * @good_uri_pairs +
-	3 * @bad_uri_pairs  +
-	3 * @functions      +
-	0;
+use Test::Builder::Tester;
 use Test::More;
 use Test::URI;
 
@@ -138,19 +131,4 @@ foreach my $pair ( @bad_uri_pairs )
 		skip_err => 1,
 		);
 
-	}
-
-foreach my $function ( @functions )
-	{
-	eval { eval "$function( 'http://www.example.com', 'http', 'bar' )"; die $@ };
-	like( $@, qr/Too many arguments for Test::URI::$function/,
-		"$function catches too many arguments" );
-
-	eval { eval "$function( 'http://www.example.com' )"; die $@ };
-	like( $@, qr/Not enough arguments for Test::URI::$function/,
-			"$function catches single arguments" );
-
-	eval { eval "$function( )"; die $@ };
-	like( $@, qr/Not enough arguments for Test::URI::$function/,
-				"$function catches no arguments" );
 	}
