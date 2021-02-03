@@ -143,8 +143,7 @@ STRING can be an URI object.
 
 =cut
 
-sub uri_fragment_ok
-	{
+sub uri_fragment_ok {
 	_methodx_ok( $_[0], $_[1], 'fragment' );
 	}
 
