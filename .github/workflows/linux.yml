@@ -1,5 +1,5 @@
 # brian's standard GitHub Actions Ubuntu config for Perl 5 modules
-# version 20250515.001
+# version 20250615.001
 # https://github.com/briandfoy/github_workflows
 # https://github.com/features/actions
 # This file is licensed under the Artistic License 2.0
@@ -111,6 +111,7 @@ jobs:
                 apt-get -y update
                 apt-get -y upgrade
                 apt-get -y install curl ${{ vars.UBUNTU_EXTRA_APT_GET }}
+                git config --global --add safe.directory $(pwd)
             - name: Perl version check
               run: |
                 perl -V
@@ -144,6 +145,17 @@ jobs:
                 pwd
                 ls
                 rm -rfv HTML-Tagset-*
+# Restore the last module installation for this OS/perl combination. This
+# saves several minutes in some cases. When cpan installs updates, the
+# 'save' counterpart for 'restore' will update the cache.
+            - name: Restore Perl modules
+              id: perl-modules-cache-restore
+              uses: actions/cache/restore@v4
+              with:
+                key: ${{ runner.os }}-${{ matrix.perl-version }}-modules
+                path: |
+                  /usr/local/lib/perl5
+                  /usr/local/bin/cover
 # I had some problems with openssl on Ubuntu, so I punted by installing
 # cpanm first, which is easy. I can install IO::Socket::SSL with that,
 # then switch back to cpan. I didn't explore this further, but what you
@@ -205,3 +217,13 @@ jobs:
                 cpanm --notest Devel::Cover Devel::Cover::Report::Coveralls
                 perl Makefile.PL
                 cover -test +ignore 'Makefile.PL' -report coveralls
+# Now always save the Perl modules in case we updated some versions
+            - name: Save Perl modules
+              id: perl-modules-cache-save
+              uses: actions/cache/save@v4
+              if: always()
+              with:
+                key: ${{ steps.perl-modules-cache-restore.outputs.cache-primary-key }}
+                path: |
+                  /usr/local/lib/perl5
+                  /usr/local/bin/cover
