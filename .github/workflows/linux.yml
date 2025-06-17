@@ -251,3 +251,4 @@ jobs:
                 path: |
                   /usr/local/lib/perl5
                   /usr/local/bin/cover
+                  ${{ env.HOME }}/.cpan/CPAN/MyConfig.pm
