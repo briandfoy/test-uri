@@ -157,7 +157,9 @@ jobs:
               id: perl-modules-cache
               uses: actions/cache@v4
               with:
-                key: ${{ runner.os }}-${{ matrix.perl-version }}-modules
+                key: ${{ runner.os }}-${{ matrix.perl-version }}-modules-$(echo $$)$(date +%s)
+                restore-keys: |
+                    ${{ runner.os }}-${{ matrix.perl-version }}-modules-
                 path: |
                   /usr/local/lib/perl5
                   /usr/local/bin/cover
