@@ -38,6 +38,10 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
     cancel-in-progress: true
 
+permissions:
+    actions: write
+    contents: read
+
 on:
     push:
         branches:
@@ -111,7 +115,10 @@ jobs:
               run: |
                 apt-get -y update
                 apt-get -y upgrade
-                apt-get -y install curl ${{ vars.UBUNTU_EXTRA_APT_GET }}
+                apt-get -y install \
+                    curl \
+                    jq \
+                    ${{ vars.UBUNTU_EXTRA_APT_GET }}
                 git config --global --add safe.directory $(pwd)
             - name: Perl version check
               run: |
@@ -149,9 +156,9 @@ jobs:
 # Restore the last module installation for this OS/perl combination. This
 # saves several minutes in some cases. When cpan installs updates, the
 # 'save' counterpart for 'restore' will update the cache.
-            - name: Cache Perl modules
-              id: perl-modules-cache
-              uses: actions/cache@v4
+            - name: Restore Perl modules
+              id: perl-modules-cache-restore
+              uses: actions/cache/restore@v4
               with:
                 key: ${{ runner.os }}-${{ matrix.perl-version }}-modules
                 path: |
@@ -228,3 +235,13 @@ jobs:
                 cpanm --notest Devel::Cover Devel::Cover::Report::Coveralls
                 perl Makefile.PL
                 cover -test +ignore 'Makefile.PL' -report coveralls
+# Now always save the Perl modules in case we updated some versions
+            - name: Save Perl modules
+              id: perl-modules-cache-save
+              uses: actions/cache/save@v4
+              if: always()
+              with:
+                key: ${{ steps.perl-modules-cache-restore.outputs.cache-primary-key }}
+                path: |
+                  /usr/local/lib/perl5
+                  /usr/local/bin/cover
