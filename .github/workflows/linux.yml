@@ -124,6 +124,8 @@ jobs:
                 git config --global --add safe.directory $(pwd)
             - name: Perl version check
               run: |
+                which perl
+                which cpan
                 perl -V
                 perl -v | perl -0777 -ne 'm/(v5\.\d+)/ && print "PERL_VERSION=$1"' >> $GITHUB_ENV
 # Some older versions of Perl have trouble with hostnames in certs. I
@@ -166,6 +168,7 @@ jobs:
                 path: |
                   /usr/local/lib/perl5
                   /usr/local/bin/cover
+                  ${{ env.HOME }}/.cpan/CPAN/MyConfig.pm
 # We cannot reuse cache keys, so we'll delete it and then save it again
 # There are various hacks for this, but GitHub has so far declined to
 # do what so many people want. This seems like a long way to go to do
