@@ -1,5 +1,5 @@
 # brian's standard GitHub Actions Ubuntu config for Perl 5 modules
-# version 20250416.001
+# version 20250515.001
 # https://github.com/briandfoy/github_workflows
 # https://github.com/features/actions
 # This file is licensed under the Artistic License 2.0
@@ -101,6 +101,9 @@ jobs:
             image: perl:${{ matrix.perl-version }}
         steps:
             - uses: actions/checkout@v3
+            - name: git corrections
+              run: |
+                git config --global --add safe.directory "$(pwd)"
             - name: Platform check
               run: uname -a
             - name: setup platform
@@ -195,9 +198,10 @@ jobs:
 # Devel::Cover 1.39
             - name: Run coverage tests
               if: env.PERL_VERSION != 'v5.8' && env.PERL_VERSION != 'v5.10'
+              continue-on-error: true
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                 cpanm --notest Devel::Cover Devel::Cover::Report::Coveralls
                 perl Makefile.PL
-                cover -test -report coveralls
+                cover -test +ignore 'Makefile.PL' -report coveralls
