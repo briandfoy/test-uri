@@ -1,5 +1,5 @@
 # brian's standard GitHub Actions Ubuntu config for Perl 5 modules
-# version 20250617.002-001
+# version 20250617.003
 # https://github.com/briandfoy/github_workflows
 # https://github.com/features/actions
 # This file is licensed under the Artistic License 2.0
@@ -124,7 +124,6 @@ jobs:
                 git config --global --add safe.directory $(pwd)
             - name: Perl version check
               run: |
-                cpan -v
                 perl -V
                 perl -v | perl -0777 -ne 'm/(v5\.\d+)/ && print "PERL_VERSION=$1"' >> $GITHUB_ENV
 # Some older versions of Perl have trouble with hostnames in certs. I
@@ -168,7 +167,6 @@ jobs:
                   /usr/local/lib/perl5
                   /usr/local/bin/cover
                   /usr/local/bin/cpan
-                  ${{ env.HOME }}/.cpan/CPAN/MyConfig.pm
 # We cannot reuse cache keys, so we'll delete it and then save it again
 # There are various hacks for this, but GitHub has so far declined to
 # do what so many people want. This seems like a long way to go to do
@@ -191,8 +189,6 @@ jobs:
               run: |
                 curl -L https://cpanmin.us | perl - App::cpanminus
                 cpanm --notest IO::Socket::SSL LWP::Protocol::https App::Cpan HTTP::Tiny ExtUtils::MakeMaker Test::Manifest Test::More ${{ vars.EXTRA_CPANM_MODULES }} ${{ vars.UBUNTU_EXTRA_CPANM_MODULES }}
-                which cpan
-                cpan -v
                 cpan -M http://www.cpan.org -T Test::Manifest ${{ vars.EXTRA_CPAN_MODULES }}
 # Install the dependencies, again not testing them. This installs the
 # module in the current directory, so we end up installing the module,
@@ -256,4 +252,3 @@ jobs:
                   /usr/local/lib/perl5
                   /usr/local/bin/cover
                   /usr/local/bin/cpan
-                  ${{ env.HOME }}/.cpan/CPAN/MyConfig.pm
